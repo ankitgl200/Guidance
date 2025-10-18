@@ -1,0 +1,524 @@
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      width: 100%;
+    }
+
+    body {
+      background: linear-gradient(to top right, #330c43 20%, #175d69 95%);
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: cover;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      margin: 10px;
+      padding: 3px;
+      background-color: rgba(245, 245, 245, 0.126);
+      border-radius: 20px;
+      position: sticky;
+      top: 6px;
+      transition: box-shadow .18s;
+
+    }
+
+    nav ul li {
+      list-style-type: none;
+      display: flex;
+      gap: 40px;
+
+    }
+
+
+    nav .sname {
+      color: blanchedalmond;
+      margin: 5px;
+      font-size: 35px;
+    }
+
+    nav .description {
+      font-size: 13px;
+      margin: 0;
+      margin-bottom: 10px;
+      padding: 0;
+      font-style: italic;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      gap: 70px;
+      color: blanchedalmond;
+      padding: 10px;
+      margin: 10px;
+      margin-top: 15px;
+      font-size: 18px;
+      border-bottom: 2px solid transparent;
+      transition: .3s ease;
+    }
+
+    nav ul li a:hover {
+      color: aqua;
+      transform: scale(1.05);
+    }
+
+
+    #main {
+      color: aqua;
+      border-bottom: 2px solid aqua;
+      transform: scale(1.05);
+    }
+
+    .hamburger {
+      display: none;
+      cursor: pointer;
+    }
+
+    .bar {
+      display: block;
+      width: 35px;
+      height: 3px;
+      margin: 5px auto;
+      -webkit-transition: all 0.3s ease;
+      transition: all 0.3s ease;
+      background-color: blanchedalmond;
+    }
+
+
+    .hero {
+
+      width: 90vw;
+      height: 84vh;
+      display: flex;
+      justify-content: space-between;
+      gap: 100px;
+      align-items: center;
+      padding-left: 110px;
+
+    }
+
+    .hero-left .one {
+      color: antiquewhite;
+      font-size: 100px;
+      font-weight: bolder;
+      text-align: center;
+      margin: 20px;
+    }
+
+    .hero-left .two {
+      font-size: 90px;
+      text-align: center;
+      font-weight: bolder;
+      color: lightgrey;
+
+    }
+
+    .hero-right img {
+      width: 600px;
+      height: 600px;
+      /* animation: float 3s ease-in-out infinite; */
+      animation: float 3s ease-in-out infinite;
+
+    }
+
+    .hero-right img {
+      transition: transform 0.3s ease;
+    }
+
+    .hero-right img :hover {
+      transform: rotate(5deg);
+    }
+
+
+    @keyframes float {
+      0% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-10px);
+      }
+
+      100% {
+        transform: translateY(0);
+      }
+    }
+
+    .content {
+      width: 90vw;
+      height: 90vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 30px;
+      margin: 20px;
+      margin-left: 70px;
+    }
+
+    .box-left,
+    .box-right {
+      width: 60%;
+      height: 90%;
+      background-color: rgba(245, 245, 245, 0.194);
+      border-radius: 10px;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      padding: 20px;
+    }
+
+    @media screen and (max-width: 768px) {
+      .content {
+        flex-direction: column;
+        margin: 20px;
+      }
+    }
+
+    .box-left,
+    .box-right {
+      width: 80%;
+      height: 100%;
+    }
+
+    .entry {
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+      width: 90%;
+      margin-left: 20px;
+      padding: 20px;
+    }
+
+    .entry div {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      gap: 8px;
+    }
+
+    .entry h2 {
+      color: #fff;
+      margin-bottom: 20px;
+      text-align: center;
+      align-items: center;
+      font-size: 40px;
+      border-bottom: 2px solid whitesmoke;
+    }
+
+    .entry label {
+      color: #fff;
+      font-size: 20px;
+      font-weight: 500;
+    }
+
+    .inputs {
+      width: 100%;
+      height: 35px;
+      border-radius: 5px;
+      border: 4px solid rgb(130, 113, 113);
+      padding: 8px;
+      font-size: 14px;
+      background-color: rgba(255, 255, 255, 0.9);
+    }
+
+    .inputs:focus {
+      outline: none;
+      border-color: #175d69;
+      box-shadow: 0 0 5px rgba(23, 93, 105, 0.5);
+    }
+
+    .submitBtn {
+      font-size: larger;
+      width: 100%;
+      height: 35px;
+      border-radius: 5px;
+      border: none;
+      background-color: #175d69;
+      text-align: center;
+      ;
+      color: white;
+      cursor: pointer;
+    }
+
+    .submitBtn:hover {
+      background-color: #6f1493ba;
+    }
+
+    .output {
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+      width: 90%;
+      margin-left: 20px;
+      padding: 20px;
+    }
+
+    .output h2 {
+      color: #fff;
+      margin-bottom: 20px;
+      text-align: center;
+      align-items: center;
+      font-size: 40px;
+      border-bottom: 2px solid whitesmoke;
+    }
+
+    .output {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      gap: 12px;
+    }
+
+    .output .response {
+      width: 100%;
+      height: 410px;
+      padding: 20px;
+      border-radius: 6px;
+      border: 4px solid rgb(130, 113, 113);
+      background-color: rgba(255, 255, 255, 0.9);
+      font-size: 18px;
+      overflow-y: auto;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      line-height: 1.8;
+      color: #333;
+      max-height: 60vh;
+      margin: 0;
+      position: relative;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    @keyframes typing {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    .typewriter-text {
+      display: inline-block;
+      animation: typing 3s steps(1);
+    }
+
+    .response-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    .loader {
+      display: none;
+      position: absolute;
+      top: 45%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 60px;
+      height: 60px;
+      border: 6px solid #f3f3f3;
+      border-top: 6px solid #175d69;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      z-index: 2;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+      }
+
+      100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+      }
+    }
+
+    .loading {
+      opacity: 0.7;
+    }
+
+    .loader-text {
+      display: none;
+      position: absolute;
+      width: 100%;
+      top: 55%;
+      left: 50%;
+      transform: translateX(-50%);
+      color: #175d69;
+      font-weight: bold;
+      text-align: center;
+      z-index: 2;
+    }
+
+
+
+    /* Responsive Navigation */
+    @media screen and (max-width: 768px) {
+      nav {
+        padding: 15px;
+      }
+
+      .hamburger {
+        display: block;
+        z-index: 101;
+      }
+
+      .hamburger.active .bar:nth-child(2) {
+        opacity: 0;
+      }
+
+      .hamburger.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+      }
+
+      .hamburger.active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+      }
+
+      .nav-menu {
+        position: fixed;
+        left: -100%;
+        top: 70px;
+        gap: 0;
+        flex-direction: column;
+        background-color: rgba(245, 245, 245, 0.126);
+        backdrop-filter: blur(10px);
+        width: 100%;
+        text-align: center;
+        transition: 0.3s;
+        padding: 20px 0;
+        border-radius: 20px 20px;
+      }
+
+      .nav-menu.active {
+        left: 0;
+      }
+
+      nav ul li {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      nav ul li a {
+        margin: 5px;
+        padding: 10px;
+        display: block;
+      }
+
+      nav .sname {
+        color: blanchedalmond;
+        margin: 5px;
+        font-size: 20px;
+      }
+
+      nav .description {
+        display: none;
+      }
+
+
+      .hero {
+        flex-direction: column;
+        padding: 20px;
+        margin: 0;
+        height: auto;
+        text-align: center;
+        gap: 0px;
+        width: 100%;
+        height: 80vh;
+        padding-left: 20px;
+      }
+
+      .hero-left .one {
+        font-size: 30px;
+        margin: 40px;
+      }
+
+      .hero-left .two {
+        font-size: 30px;
+      }
+
+      .hero-right {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .hero-right img {
+        width: 200px;
+        height: 200px;
+        max-width: 80%;
+      }
+
+      .content {
+        flex-direction: column;
+        margin: 16px;
+        padding: 8px 0;
+        width: calc(100% - 32px);
+        gap: 17px;
+        align-items: stretch;
+
+        /* push boxes toward the bottom of the viewport on small screens */
+        justify-content: flex-end;
+        min-height: calc(100vh + 450px);
+        /* adjust this value if header/hero size changes */
+
+        /* Make the boxes stack and fit the viewport on small screens */
+        .box-left,
+        .box-right {
+          width: 100%;
+          height: auto;
+          padding: 16px;
+          border-radius: 10px;
+          background-clip: padding-box;
+          margin-top: 8px;
+          margin-bottom: 8px;
+          /* ensure they can be pushed down */
+          align-self: stretch;
+        }
+
+        /* Ensure form and output take full width and remove left margin */
+        .entry,
+        .output {
+          width: 100%;
+          margin-left: 0;
+          padding: 12px;
+        }
+
+        /* Increase response area height for small screens */
+        .output .response {
+          height: 60vh;
+          /* increased height */
+          max-height: 75vh;
+          /* cap so it doesn't overflow the viewport */
+          overflow-y: auto;
+          min-height: 40vh;
+        }
+
+        /* Inputs and buttons full width on mobile */
+        .inputs,
+        .submitBtn {
+          width: 100%;
+          box-sizing: border-box;
+        }
+
+        /* Slightly smaller headings on mobile */
+        .entry h2,
+        .output h2 {
+          font-size: 24px;
+        }
+      }
+    }

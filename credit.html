@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  width: 100%;
+}
+
+body {
+  background: linear-gradient(to top right, #330c43 20%, #175d69 95%);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  overflow-x: hidden;
+  position: relative;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px;
+  padding: 3px;
+  background-color: rgba(245, 245, 245, 0.126);
+  border-radius: 20px;
+  position: sticky;
+  top: 6px;
+  transition: box-shadow .18s;
+
+}
+
+nav ul li {
+  list-style-type: none;
+  display: flex;
+  gap: 40px;
+
+}
+
+
+nav .sname {
+  color: blanchedalmond;
+  margin: 5px;
+  font-size: 35px;
+}
+
+nav .description {
+  font-size: 13px;
+  margin: 0;
+  margin-bottom: 10px;
+  padding: 0;
+  font-style: italic;
+}
+
+nav ul li a {
+  text-decoration: none;
+  gap: 70px;
+  color: blanchedalmond;
+  padding: 10px;
+  margin: 10px;
+  margin-top: 15px;
+  font-size: 18px;
+  border-bottom: 2px solid transparent;
+  transition: .3s ease;
+}
+
+nav ul li a:hover {
+  color: aqua;
+  transform: scale(1.05);
+}
+
+
+#main{
+  color: aqua;
+  border-bottom: 2px solid aqua;
+  transform: scale(1.05);
+}
+.hamburger {
+  display: none;
+  cursor: pointer;
+}
+
+.bar {
+  display: block;
+  width: 35px;
+  height: 3px;
+  margin: 5px auto;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  background-color: blanchedalmond;
+}
+
+
+.hero {
+
+  width: 90vw;
+  height: 84vh;
+  display: flex;
+  justify-content: space-between;
+  gap: 100px;
+  align-items: center;
+  padding-left: 110px;
+
+}
+
+.hero-left .one {
+  color: antiquewhite;
+  font-size: 100px;
+  font-weight: bolder;
+  text-align: center;
+  margin: 20px;
+}
+
+.hero-left .two {
+  font-size: 90px;
+  text-align: center;
+  font-weight: bolder;
+  color: lightgrey;
+
+}
+
+.hero-right img {
+  width: 600px;
+  height: 600px;
+  /* animation: float 3s ease-in-out infinite; */
+  animation: float 3s ease-in-out infinite;
+
+}
+
+.hero-right img {
+  transition: transform 0.3s ease;
+}
+
+.hero-right img :hover {
+  transform: rotate(5deg);
+}
+
+
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Navigation */
+@media screen and (max-width: 768px) {
+  nav {
+    padding: 15px;
+  }
+
+  .hamburger {
+    display: block;
+    z-index: 101;
+  }
+
+  .hamburger.active .bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  .hamburger.active .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+
+  .hamburger.active .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+
+  .nav-menu {
+    position: fixed;
+    left: -100%;
+    top: 70px;
+    gap: 0;
+    flex-direction: column;
+    background-color: rgba(245, 245, 245, 0.126);
+    backdrop-filter: blur(10px);
+    width: 100%;
+    text-align: center;
+    transition: 0.3s;
+    padding: 20px 0;
+    border-radius:  20px 20px;
+  }
+
+  .nav-menu.active {
+    left: 0;
+  }
+
+  nav ul li {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  nav ul li a {
+    margin: 5px;
+    padding: 10px;
+    display: block;
+  }
+
+  nav .sname {
+    color: blanchedalmond;
+    margin: 5px;
+    font-size: 20px;
+  }
+
+  nav .description {
+    display: none;
+  }
+
+
+  .hero {
+    flex-direction: column;
+    padding: 20px;
+    margin: 0;
+    height: auto;
+    text-align: center;
+    gap: 30px;
+    width: 100%;
+    padding-left: 20px;
+  }
+
+  .hero-left .one {
+    font-size: 40px;
+    margin: 10px;
+  }
+
+  .hero-left .two {
+    font-size: 40px;
+  }
+
+  .hero-right {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .hero-right img {
+    width: 200px;
+    height: 200px;
+    max-width: 90%;
+  }
+}
+
+.content{
+    width: 90vw;
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    /* margin: 20px; */
+    margin-left: 70px;
+  }
+
+.box-left, .box-right{
+  width: 60%;
+  height: 90%;
+  border: 2px solid white;
+  background-color: rgba(245, 245, 245, 0.199);
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  align-items: center;
+}
+
+
+
+
+</style>
+<body>
+     <nav>
+      <div class="sname">Site Name
+        <p class="description">Make Your Carrer Perfect By Getting a Perfect Roadmap</p>
+      </div>
+      <div class="hamburger">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </div>
+      <ul class="nav-menu">
+        <li class="nav-item">
+          <a href="index.html" class="nav-link">Home</a>
+          <a href="about.html" class="nav-link">About</a>
+          <a href="contact.html" class="nav-link">Contact</a>
+          <a href="#" class="nav-link" id="main">Credits</a>
+        </li>
+      </ul>
+    </nav>
+
+    <section class="hero">
+            <div class="hero-left">
+                <div class="one">Welcome To</div>
+                <div class="two">SITE NAME</div>
+            </div>
+            <div class="hero-right">
+                <img src="./chatbot.png" alt="image">
+            </div>
+        </section>
+        <hr>
+    <section class="content">
+      <div class="box-left">
+        <p>this is left</p>
+      </div>
+      <div class="box-right">
+        <p>this is right</p>
+      </div>
+    </section>
+
+    <hr>
+
+    <section class="other">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, quaerat pariatur? Facilis, distinctio ipsum adipisci illo praesentium totam porro libero doloribus ea soluta saepe sint quod? Aliquam ex perspiciatis quis deleniti ipsum? Adipisci error facere animi exercitationem unde vero, hic quis ea nemo dolorum excepturi fugit distinctio, numquam est corporis sit enim quam cum id. Temporibus sunt, est voluptatem dolorem minus nobis, quibusdam enim doloribus at ipsam illo, aut dignissimos dolor eius asperiores placeat voluptatibus alias voluptate amet. Odio veniam aliquam, nesciunt iste dicta ea tempora rem corporis consequuntur, natus voluptates nulla consectetur, quod aspernatur! Dolor numquam rerum dignissimos reiciendis.
+    </section>
+
+        
+    <script>
+        const hamburger = document.querySelector(".hamburger");
+        const navMenu = document.querySelector(".nav-menu");
+
+        hamburger.addEventListener("click", () => {
+            hamburger.classList.toggle("active");
+            navMenu.classList.toggle("active");
+        });
+
+        document.querySelectorAll(".nav-link").forEach(n => n.addEventListener("click", () => {
+            hamburger.classList.remove("active");
+            navMenu.classList.remove("active");
+        }));
+    </script>
+</body>
+</html>
