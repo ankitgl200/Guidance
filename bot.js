@@ -29,7 +29,7 @@ const hamburger = document.querySelector(".hamburger");
 
 
     // Your Hugging Face API token - Replace this with your actual token
-    const HF_TOKEN = "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";
+    const HF_TOKEN = "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";
 
     function showLoader() {
       const loader = document.querySelector('.loader');
@@ -162,4 +162,5 @@ const hamburger = document.querySelector(".hamburger");
         console.error("Error:", error);
         responseBox.textContent = `Error: ${error.message}. Please make sure you have a valid API token and try again.`;
       }
+
     });
