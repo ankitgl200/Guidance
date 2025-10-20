@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Finder</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    html,
+    body {
+        width: 100%;
+        height: 100%;
+    }
+
+    body {
+        min-height: 100vh;
+        background: linear-gradient(to top right, #330c43 20%, #175d69 95%);
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+        overflow-x: hidden;
+        position: relative;
+    }
+
+    /* Navigation Styles */
+    nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 10px;
+        padding: 10px 20px;
+        background-color: rgba(245, 245, 245, 0.126);
+        border-radius: 20px;
+        position: sticky;
+        top: 6px;
+        transition: box-shadow 0.18s;
+        z-index: 100;
+        backdrop-filter: blur(10px);
+    }
+
+    .sname {
+        color: blanchedalmond;
+        font-size: 28px;
+        font-weight: 600;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .description {
+        font-size: 11px;
+        margin: 0;
+        padding: 0;
+        font-style: italic;
+        color: blanchedalmond;
+        opacity: 0.9;
+    }
+
+    nav ul {
+        display: flex;
+        list-style: none;
+        gap: 30px;
+    }
+
+    nav ul li a {
+        text-decoration: none;
+        color: blanchedalmond;
+        padding: 8px 12px;
+        font-size: 16px;
+        border-bottom: 2px solid transparent;
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+
+    nav ul li a:hover {
+        color: aqua;
+        border-bottom: 2px solid aqua;
+    }
+
+    #main {
+        color: aqua;
+        border-bottom: 2px solid aqua;
+    }
+
+    .hamburger {
+        display: none;
+        flex-direction: column;
+        cursor: pointer;
+        gap: 5px;
+    }
+
+    .bar {
+        width: 25px;
+        height: 3px;
+        background-color: blanchedalmond;
+        border-radius: 3px;
+        transition: all 0.3s ease;
+    }
+
+    .hamburger.active .bar:nth-child(1) {
+        transform: rotate(45deg) translate(8px, 8px);
+    }
+
+    .hamburger.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.active .bar:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -7px);
+    }
+
+    /* Container */
+    .container {
+        max-width: 900px;
+        margin: 20px auto;
+        background: rgba(255, 255, 255, 0.98);
+        border-radius: 15px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        overflow: hidden;
+    }
+
+    .header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 30px 20px;
+        text-align: center;
+    }
+
+    .header h1 {
+        font-size: 32px;
+        margin-bottom: 8px;
+    }
+
+    .header p {
+        font-size: 15px;
+        opacity: 0.9;
+    }
+
+    .content {
+        padding: 30px 20px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: #333;
+        font-size: 14px;
+    }
+
+    select {
+        width: 100%;
+        padding: 12px 15px;
+        border: 2px solid #ddd;
+        border-radius: 8px;
+        font-size: 14px;
+        cursor: pointer;
+        background-color: white;
+        transition: all 0.3s;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    select:focus {
+        outline: none;
+        border-color: #667eea;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+    select:disabled {
+        background-color: #f5f5f5;
+        cursor: not-allowed;
+        opacity: 0.6;
+    }
+
+    .buttons {
+        display: flex;
+        gap: 12px;
+        margin-top: 30px;
+    }
+
+    button {
+        flex: 1;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .search-btn {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+    }
+
+    .search-btn:hover:not(:disabled) {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+    }
+
+    .search-btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+    .reset-btn {
+        background: #f0f0f0;
+        color: #333;
+        border: 1px solid #ddd;
+    }
+
+    .reset-btn:hover {
+        background: #e0e0e0;
+    }
+
+    .books-section {
+        margin-top: 30px;
+        display: none;
+    }
+
+    .books-section.show {
+        display: block;
+    }
+
+    .books-section h2 {
+        color: #333;
+        margin-bottom: 20px;
+        font-size: 22px;
+    }
+
+    .books-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 20px;
+    }
+
+    .book-card {
+        background: white;
+        border: 2px solid #e0e0e0;
+        border-radius: 10px;
+        padding: 20px;
+        transition: all 0.3s;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+
+    .book-card:hover {
+        border-color: #667eea;
+        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.2);
+        transform: translateY(-5px);
+    }
+
+    .book-title {
+        font-weight: 700;
+        color: #333;
+        margin-bottom: 8px;
+        font-size: 16px;
+        line-height: 1.4;
+    }
+
+    .book-author {
+        color: #666;
+        font-size: 13px;
+        margin-bottom: 15px;
+        flex-grow: 1;
+    }
+
+    .book-link {
+        display: inline-block;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 10px 15px;
+        border-radius: 6px;
+        text-decoration: none;
+        font-size: 13px;
+        text-align: center;
+        transition: all 0.3s;
+        font-weight: 600;
+    }
+
+    .book-link:hover {
+        transform: scale(1.05);
+    }
+
+    .no-results {
+        text-align: center;
+        color: #999;
+        padding: 40px 20px;
+        font-size: 16px;
+    }
+
+    .message {
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        font-size: 14px;
+    }
+
+    .message.info {
+        background: #e3f2fd;
+        color: #1976d2;
+        border-left: 4px solid #1976d2;
+    }
+
+    /* Mobile Responsive */
+    @media screen and (max-width: 768px) {
+        nav {
+            margin: 8px;
+            padding: 12px 15px;
+        }
+
+        .sname {
+            font-size: 22px;
+        }
+
+        .description {
+            font-size: 10px;
+            display: none;
+        }
+
+        nav ul {
+            display: none;
+            position: fixed;
+            left: -100%;
+            top: 70px;
+            flex-direction: column;
+            background-color: rgba(51, 12, 67, 0.95);
+            width: 100%;
+            text-align: center;
+            transition: 0.3s;
+            box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+            padding: 20px 0;
+            gap: 0;
+            z-index: 99;
+            backdrop-filter: blur(10px);
+        }
+
+        nav ul.active {
+            left: 0;
+        }
+
+        nav ul li {
+            width: 100%;
+        }
+
+        nav ul li a {
+            display: block;
+            padding: 12px 20px;
+            border-bottom: 1px solid rgba(245, 245, 245, 0.1);
+        }
+
+        .hamburger {
+            display: flex;
+        }
+
+        .container {
+            margin: 15px;
+            border-radius: 12px;
+        }
+
+        .header {
+            padding: 20px 15px;
+        }
+
+        .header h1 {
+            font-size: 24px;
+        }
+
+        .header p {
+            font-size: 13px;
+        }
+
+        .content {
+            padding: 20px 15px;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .buttons {
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        button {
+            padding: 14px 16px;
+            font-size: 15px;
+        }
+
+        .books-grid {
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .book-card {
+            padding: 15px;
+        }
+
+        .book-title {
+            font-size: 15px;
+        }
+
+        .book-author {
+            font-size: 12px;
+        }
+
+        .books-section h2 {
+            font-size: 18px;
+        }
+    }
+
+    @media screen and (max-width: 480px) {
+        .sname {
+            font-size: 18px;
+        }
+
+        .container {
+            margin: 10px;
+            border-radius: 10px;
+        }
+
+        .header {
+            padding: 15px 12px;
+        }
+
+        .header h1 {
+            font-size: 20px;
+        }
+
+        .content {
+            padding: 15px 12px;
+        }
+
+        .books-grid {
+            grid-template-columns: 1fr;
+        }
+
+        select {
+            padding: 10px 12px;
+            font-size: 13px;
+        }
+
+        label {
+            font-size: 13px;
+        }
+
+        nav {
+            margin: 5px;
+            padding: 10px 12px;
+        }
+
+        nav ul li a {
+            font-size: 15px;
+        }
+    }
+</style>
+
+<body>
+    <nav>
+        <div class="sname">
+            Site Name
+            <p class="description">Make Your Career Perfect</p>
+        </div>
+        <div class="hamburger" id="hamburger">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+        <ul id="navMenu">
+            <li>
+                <a href="index.html" class="nav-link">Home</a>
+            </li>
+            <li>
+                <a href="#" class="nav-link">About</a>
+            </li>
+            <li>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </li>
+            <li>
+                <a href="find.html" class="nav-link" id="main">Books</a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="header">
+            <h1>📚 Book Finder</h1>
+            <p>Find the perfect books for your studies</p>
+        </div>
+
+        <div class="content">
+            <div class="form-group">
+                <label for="eduLevel">Education Level</label>
+                <select id="eduLevel">
+                    <option value="">-- Select Education Level --</option>
+                    <option value="school">School</option>
+                    <option value="graduation">Graduation</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="classOrCourse">Class / Course</label>
+                <select id="classOrCourse" disabled>
+                    <option value="">-- First select education level --</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="subject">Subject</label>
+                <select id="subject" disabled>
+                    <option value="">-- First select class/course --</option>
+                </select>
+            </div>
+
+            <div class="buttons">
+                <button class="search-btn" id="searchBtn" disabled>Search Books</button>
+                <button class="reset-btn" id="resetBtn">Reset</button>
+            </div>
+
+            <div class="books-section" id="booksSection">
+                <div id="message"></div>
+                <h2>Available Books</h2>
+                <div class="books-grid" id="booksGrid"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Books Database
+        const booksDatabase = {
+            school: {
+                "class-9": {
+                    "Mathematics": [
+                        { title: "Class 9 Mathematics NCERT", author: "NCERT", link: "https://ncert.nic.in/textbook.php" },
+                        { title: "RD Sharma Mathematics Class 9", author: "R.D. Sharma", link: "https://new5.filepress.today/file/681f1f6a866b45649de9ef82" },
+                        { title: "All in One Mathematics Class 9", author: "Arihant", link: "https://www.amazon.com/All-Mathematics-Class-9/dp/9325298921" }
+                    ],
+                    "Science": [
+                        { title: "Class 9 Science NCERT", author: "NCERT", link: "https://ncert.nic.in/textbook.php" },
+                        { title: "Physics Lab Manual Class 9", author: "CBSE", link: "https://www.amazon.com/Physics-Manual-Class-9/dp/9388725617" },
+                        { title: "Science for Class 9", author: "Lakhmir Singh", link: "https://www.amazon.com/Science-Class-9-Lakhmir-Singh/dp/8131805255" }
+                    ],
+                    "English": [
+                        { title: "Class 9 English NCERT", author: "NCERT", link: "https://ncert.nic.in/textbook.php" },
+                        { title: "Grammar and Composition", author: "Wren & Martin", link: "https://www.amazon.com/English-Grammar-Composition-Class-9/dp/9380644779" }
+                    ],
+                    "Social Studies": [
+                        { title: "Class 9 History NCERT", author: "NCERT", link: "https://ncert.nic.in/textbook.php" },
+                        { title: "Geography Class 9 NCERT", author: "NCERT", link: "https://ncert.nic.in/textbook.php" }
+                    ]
+                },
+                "class-10": {
+                    "Mathematics": [
+                        { title: "Class 10 Mathematics NCERT", author: "NCERT", link: "https://ncert.nic.in/textbook.php" },
+                        { title: "RD Sharma Mathematics Class 10", author: "R.D. Sharma", link: "https://www.amazon.com/RD-Sharma-Mathematics-Class-10/dp/9389411255" }
+                    ],
+                    "Science": [
+                        { title: "Class 10 Science NCERT", author: "NCERT", link: "https://ncert.nic.in/textbook.php" },
+                        { title: "Chemistry Class 10", author: "Lakhmir Singh", link: "https://www.amazon.com/Chemistry-Class-10-Lakhmir-Singh/dp/8131805434" }
+                    ],
+                    "English": [
+                        { title: "Class 10 English NCERT", author: "NCERT", link: "https://ncert.nic.in/textbook.php" }
+                    ]
+                },
+                "class-11": {
+                    "Mathematics": [
+                        { title: "Class 11 Mathematics NCERT", author: "NCERT", link: "https://ncert.nic.in/textbook.php" },
+                        { title: "RD Sharma Mathematics Class 11", author: "R.D. Sharma", link: "https://www.amazon.com/RD-Sharma-Mathematics-Class-11/dp/9389411301" }
+                    ],
+                    "Physics": [
+                        { title: "Class 11 Physics NCERT", author: "NCERT", link: "https://ncert.nic.in/textbook.php" },
+                        { title: "HC Verma Concepts of Physics", author: "H.C. Verma", link: "https://www.amazon.com/Concepts-Physics-H-C-Verma/dp/8177091611" }
+                    ],
+                    "Chemistry": [
+                        { title: "Class 11 Chemistry NCERT", author: "NCERT", link: "https://ncert.nic.in/textbook.php" }
+                    ]
+                },
+                "class-12": {
+                    "Mathematics": [
+                        { title: "Class 12 Mathematics NCERT", author: "NCERT", link: "https://ncert.nic.in/textbook.php" },
+                        { title: "RD Sharma Mathematics Class 12", author: "R.D. Sharma", link: "https://www.amazon.com/RD-Sharma-Mathematics-Class-12/dp/9389411379" }
+                    ],
+                    "Physics": [
+                        { title: "Class 12 Physics NCERT", author: "NCERT", link: "https://ncert.nic.in/textbook.php" },
+                        { title: "HC Verma Physics Class 12", author: "H.C. Verma", link: "https://www.amazon.com/Concepts-Physics-H-C-Verma/dp/8177091611" }
+                    ],
+                    "Chemistry": [
+                        { title: "Class 12 Chemistry NCERT", author: "NCERT", link: "https://ncert.nic.in/textbook.php" }
+                    ]
+                }
+            },
+            graduation: {
+                "B.Tech": {
+                    "Data Structures": [
+                        { title: "Introduction to Algorithms", author: "CLRS", link: "https://www.amazon.com/Introduction-Algorithms-3rd-MIT-Press/dp/0262033844" },
+                        { title: "Data Structures & Algorithms", author: "Cormen", link: "https://www.amazon.com/Data-Structures-Algorithms-Alfred-Aho/dp/0201633953" }
+                    ],
+                    "Database Management": [
+                        { title: "Fundamentals of Database Systems", author: "Elmasri & Navathe", link: "https://www.amazon.com/Fundamentals-Database-Systems-Ramez-Elmasri/dp/0133970779" },
+                        { title: "Database Design", author: "C.J Date", link: "https://www.amazon.com/Introduction-Database-Systems-C-J-Date/dp/032141824X" }
+                    ],
+                    "Web Development": [
+                        { title: "Web Development with HTML CSS", author: "Jon Duckett", link: "https://www.amazon.com/HTML-CSS-Design-Build-Websites/dp/1118008189" },
+                        { title: "JavaScript the Good Parts", author: "Douglas Crockford", link: "https://www.amazon.com/JavaScript-Good-Parts-Douglas-Crockford/dp/0596517742" }
+                    ]
+                },
+                "B.A": {
+                    "History": [
+                        { title: "A History of Modern India", author: "Ramachandra Guha", link: "https://www.amazon.com/History-Modern-India-Ramachandra-Guha/dp/0143029894" },
+                        { title: "The Discovery of India", author: "Jawaharlal Nehru", link: "https://www.amazon.com/Discovery-India-Jawaharlal-Nehru/dp/0143039450" }
+                    ],
+                    "Literature": [
+                        { title: "The Great Gatsby", author: "F. Scott Fitzgerald", link: "https://www.amazon.com/Great-Gatsby-F-Scott-Fitzgerald/dp/0743273567" },
+                        { title: "Pride and Prejudice", author: "Jane Austen", link: "https://www.amazon.com/Pride-Prejudice-Jane-Austen/dp/0141439513" }
+                    ],
+                    "Philosophy": [
+                        { title: "An Introduction to Philosophy", author: "Norman Melchert", link: "https://www.amazon.com/Introduction-Philosophy-Norman-Melchert/dp/0078038286" }
+                    ]
+                },
+                "B.Sc": {
+                    "Physics": [
+                        { title: "Physics for Scientists and Engineers", author: "Serway", link: "https://www.amazon.com/Physics-Scientists-Engineers-9th-Serway/dp/1305254865" },
+                        { title: "University Physics", author: "Young & Freedman", link: "https://www.amazon.com/University-Physics-Hugh-Young/dp/0135159555" }
+                    ],
+                    "Chemistry": [
+                        { title: "Physical Chemistry", author: "Atkins", link: "https://www.amazon.com/Physical-Chemistry-Quantum-Chemistry-Spectroscopy/dp/0199268963" },
+                        { title: "Organic Chemistry", author: "Morrison & Boyd", link: "https://www.amazon.com/Organic-Chemistry-Mullins-Boyd/dp/0321942302" }
+                    ],
+                    "Biology": [
+                        { title: "Molecular Biology of the Gene", author: "Watson", link: "https://www.amazon.com/Molecular-Biology-Gene-James-Watson/dp/0134144325" }
+                    ]
+                }
+            }
+        };
+
+        const eduLevelSelect = document.getElementById("eduLevel");
+        const classOrCourseSelect = document.getElementById("classOrCourse");
+        const subjectSelect = document.getElementById("subject");
+        const searchBtn = document.getElementById("searchBtn");
+        const resetBtn = document.getElementById("resetBtn");
+        const booksSection = document.getElementById("booksSection");
+        const booksGrid = document.getElementById("booksGrid");
+        const messageDiv = document.getElementById("message");
+        const hamburger = document.getElementById("hamburger");
+        const navMenu = document.getElementById("navMenu");
+
+        // Hamburger Menu Toggle
+        hamburger.addEventListener("click", () => {
+            hamburger.classList.toggle("active");
+            navMenu.classList.toggle("active");
+        });
+
+        // Close menu when link clicked
+        document.querySelectorAll(".nav-link").forEach(link => {
+            link.addEventListener("click", () => {
+                hamburger.classList.remove("active");
+                navMenu.classList.remove("active");
+            });
+        });
+
+        // Populate class/course based on education level
+        eduLevelSelect.addEventListener("change", function () {
+            const level = this.value;
+            classOrCourseSelect.innerHTML = '<option value="">-- Select --</option>';
+            subjectSelect.innerHTML = '<option value="">-- First select class/course --</option>';
+            subjectSelect.disabled = true;
+            searchBtn.disabled = true;
+
+            if (level) {
+                const options = Object.keys(booksDatabase[level]);
+                options.forEach(option => {
+                    const optEl = document.createElement("option");
+                    optEl.value = option;
+                    optEl.textContent = option.replace(/-/g, " ").toUpperCase();
+                    classOrCourseSelect.appendChild(optEl);
+                });
+                classOrCourseSelect.disabled = false;
+            } else {
+                classOrCourseSelect.disabled = true;
+            }
+        });
+
+        // Populate subjects based on class/course
+        classOrCourseSelect.addEventListener("change", function () {
+            const level = eduLevelSelect.value;
+            const classOrCourse = this.value;
+            subjectSelect.innerHTML = '<option value="">-- Select --</option>';
+            searchBtn.disabled = true;
+
+            if (classOrCourse && level) {
+                const subjects = Object.keys(booksDatabase[level][classOrCourse]);
+                subjects.forEach(subject => {
+                    const optEl = document.createElement("option");
+                    optEl.value = subject;
+                    optEl.textContent = subject;
+                    subjectSelect.appendChild(optEl);
+                });
+                subjectSelect.disabled = false;
+            } else {
+                subjectSelect.disabled = true;
+            }
+        });
+
+        // Enable search button when subject is selected
+        subjectSelect.addEventListener("change", function () {
+            searchBtn.disabled = !this.value;
+        });
+
+        // Search for books
+        searchBtn.addEventListener("click", function () {
+            const level = eduLevelSelect.value;
+            const classOrCourse = classOrCourseSelect.value;
+            const subject = subjectSelect.value;
+
+            if (!level || !classOrCourse || !subject) {
+                messageDiv.innerHTML = '<div class="message info">Please select all fields</div>';
+                return;
+            }
+
+            const books = booksDatabase[level][classOrCourse][subject];
+
+            messageDiv.innerHTML = '';
+            booksGrid.innerHTML = '';
+
+            if (books && books.length > 0) {
+                books.forEach(book => {
+                    const bookCard = document.createElement("div");
+                    bookCard.className = "book-card";
+                    bookCard.innerHTML = `
+                        <div class="book-title">${book.title}</div>
+                        <div class="book-author">by ${book.author}</div>
+                        <a href="${book.link}" target="_blank" class="book-link">View Book</a>
+                    `;
+                    booksGrid.appendChild(bookCard);
+                });
+                booksSection.classList.add("show");
+            } else {
+                booksGrid.innerHTML = '<div class="no-results">No books found for this selection</div>';
+                booksSection.classList.add("show");
+            }
+        });
+
+        // Reset form
+        resetBtn.addEventListener("click", function () {
+            eduLevelSelect.value = "";
+            classOrCourseSelect.value = "";
+            classOrCourseSelect.disabled = true;
+            subjectSelect.value = "";
+            subjectSelect.disabled = true;
+            searchBtn.disabled = true;
+            booksSection.classList.remove("show");
+            messageDiv.innerHTML = '';
+            booksGrid.innerHTML = '';
+        });
+    </script>
+</body>
+
+</html>
