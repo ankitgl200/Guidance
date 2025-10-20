@@ -8,7 +8,93 @@
   <title>Document</title>
 </head>
 <style>
-  
+  .footer {
+    max-width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    padding: 40px;
+    background: rgba(20, 20, 19, 0.763);
+    border-top: 1px solid rgba(18, 18, 17, 0.968);
+  }
+
+  .footer-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+  }
+
+  .footer-section h2 {
+    text-align: center;
+    color: #f4a022ca;
+    font-size: 30px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .footer-section h3 {
+    text-align: center;
+    color: #f3c072ca;
+    font-size: 20px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .footer-section p {
+    text-align: center;
+    color: #ebe7e1ca;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0px;
+  }
+
+  .contact-list {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .contact-item {
+    font-size: 14px;
+    color: #b0b0b0;
+    line-height: 1.5;
+    white-space: nowrap;
+  }
+
+  .contact-name {
+    color: #fcfbfb;
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  .contact-phone {
+    color: #ff8c00;
+    font-weight: 500;
+  }
+
+  @media (max-width: 768px) {
+    .contact-list {
+      gap: 15px;
+    }
+
+    .contact-item {
+      font-size: 12px;
+    }
+
+    .footer-section h3 {
+      font-size: 16px;
+    }
+  }
 </style>
 
 <body>
@@ -86,15 +172,110 @@
 
   <hr>
 
-  <section class="other">
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, quaerat pariatur? Facilis, distinctio ipsum adipisci
-    illo praesentium totam porro libero doloribus ea soluta saepe sint quod? Aliquam ex perspiciatis quis deleniti
-    ipsum? Adipisci error facere animi exercitationem unde vero, hic quis ea nemo dolorum excepturi fugit distinctio,
-    numquam est corporis sit enim quam cum id. Temporibus sunt, est voluptatem dolorem minus nobis, quibusdam enim
-    doloribus at ipsam illo, aut dignissimos dolor eius asperiores placeat voluptatibus alias voluptate amet. Odio
-    veniam aliquam, nesciunt iste dicta ea tempora rem corporis consequuntur, natus voluptates nulla consectetur, quod
-    aspernatur! Dolor numquam rerum dignissimos reiciendis.
+  <section class="book-lib">
+    <div class="other">
+      <h2> Books Section</h2>
+    </div>
+    <div class="book-cards">
+      <div class="book-card">
+        <img src="https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1599648837i/55281145.jpg"
+          alt="Book 1">
+        <h3>Let us C</h3>
+        <p>by Robert C. Martin</p>
+        <button class="bookbtn">
+          <a href="#">View Book</a>
+        </button>
+      </div>
+      <div class="book-card">
+        <img src="https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1599648837i/55281145.jpg"
+          alt="Book 1">
+        <h3>Let us C</h3>
+        <p>by Robert C. Martin</p>
+        <button class="bookbtn">
+          <a href="#">View Book</a>
+        </button>
+      </div>
+      <div class="book-card">
+        <img src="https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1599648837i/55281145.jpg"
+          alt="Book 1">
+        <h3>Let us C</h3>
+        <p>by Robert C. Martin</p>
+        <button class="bookbtn">
+          <a href="#">View Book</a>
+        </button>
+      </div>
+      <div class="book-card">
+        <img src="https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1599648837i/55281145.jpg"
+          alt="Book 1">
+        <h3>Let us C</h3>
+        <p>by Robert C. Martin</p>
+        <button class="bookbtn">
+          <a href="#">View Book</a>
+        </button>
+      </div>
+      <div class="book-card">
+        <img src="https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1599648837i/55281145.jpg"
+          alt="Book 1">
+        <h3>Let us C</h3>
+        <p>by Robert C. Martin</p>
+        <button class="bookbtn">
+          <a href="#">View Book</a>
+        </button>
+      </div>
+      <div class="findbook">
+        <button class="findbtn">
+          <a href="find.html" target="_blank">Find More Books</a>
+        </button>
+      </div>
+    </div>
   </section>
+
+  <footer class="footer" id="footer">
+    <!-- Faculty Contact Section -->
+    <div class="footer-section">
+      <h2>Contact</h2>
+      <div class="footer-section">
+        <h3>E-Mails</h3>
+        <div class="contact-list">
+          <div class="contact-item">
+            <span class="contact-name"><a href="mailto:bookrequest@gmail.com" target="_blank" class="contact-name">Request
+                Book</a></span>
+          </div>
+          <div class="contact-item">
+            <span class="contact-name"><a href="mailto:helpguide@gmail.com" target="_blank" class="contact-name">Help</a></span>
+          </div>
+          <div class="contact-item">
+            <span class="contact-name"><a href="mailto:errortechnical@gmail.com" target="_blank" class="contact-name">Technical Error</a></span>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Coordinator Section -->
+    <div class="footer-section">
+      <div>
+        <h3>Contacts</h3>
+        <p>Click The Name To Contact</p>
+      </div>
+      <div class="contact-list">
+        <div class="contact-item">
+        </div>
+        <div class="contact-item">
+                    <span class="contact-name"><a href="https://wa.me/911234567891" target="_blank" class="contact-name">Request Book</a></span>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-name"><a href="https://wa.me/911234567891" target="_blank" class="contact-name">Help</a></span>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-name"><a href="https://wa.me/911234567890" target="_blank" class="contact-name">Technical Error</a></span>
+                </div>
+
+      </div>
+    </div>
+  </footer>
+
 
 
   <script src="bot.js"></script>
